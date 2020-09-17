@@ -1,19 +1,14 @@
 import React from "react";
 import { getMemberAnimalsWithUrls } from "./student";
 
-// Refactor to a functional component
 export class MemberRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: props.member.isFavorite,
+      active: false,
       likes: 0
     };
   }
-
-  toggleActive = () => {
-    this.setState({ active: !this.state.active });
-  };
 
   render() {
     const { member } = this.props;
@@ -32,10 +27,8 @@ export class MemberRow extends React.Component {
             </div>
           ))}
         </td>
-        <td
-          className={`button-cell ${this.state.active ? "active" : "default"}`}
-        >
-          <button onClick={this.toggleActive} />
+        <td className="button-cell">
+          <button />
         </td>
       </tr>
     );
