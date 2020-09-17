@@ -1,6 +1,23 @@
-# Array Methods exercise (with a little React!)
+# Liking Lifecycles in React
 
-In todays exercise we will practice the use of array methods (and also some of the other ES2015 concepts). This is exercise is embedded into a tiny React app, so we can see how the array methods are useful for an app like this.
+In todays exercise we are going to practice lifecycles for a functional and class component. 
+## Step 01 - Create a like toggle button
+✨ Requirements ✨
+ * When you click the button the class should toggle from 'default' to 'active
+ * So if a button is 'default' and is clicked it should now have an 'active' className and vice versa
+
+
+## Step 02 - Refactor into a like count
+
+✨ Requirements ✨
+ * The like count displays the number of likes each student / teacher has.
+ * The starting like count should be a random number and is set when the component first mounts.
+ * When the button is clicked the like count should go up. The count should be set and stored in state.
+ * When clicked the button should have a class of "active" that after 500ms will be reset to "default"
+
+
+## Step 03 - Refactor with all the same requirements into a functional component.
+* Meet all the same requirements as step 02 but now using a functional component.
 
 ## How to work on it
 
