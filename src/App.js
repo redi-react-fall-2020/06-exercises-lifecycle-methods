@@ -6,10 +6,10 @@ import {
   sortMembers,
   getStudents,
   getTeachers,
-  getMemberAnimalsWithUrls,
   getAnimals,
-  filterByAnimal,
-} from "./student.js";
+  filterByAnimal
+} from "./student/student.js";
+import { MemberRow } from "./student/Member";
 
 function App() {
   const [showRole, setShowRole] = useState("all");
@@ -113,26 +113,7 @@ function App() {
           </thead>
           <tbody>
             {members.map((member) => (
-              <tr className="member-row" key={member.name}>
-                <td className="avatar-cell">
-                  <img src={member.image} />
-                </td>
-                <td className="name-cell">{member.name}</td>
-                <td className="role-cell">{member.role}</td>
-                <td className="animals-cell">
-                  {getMemberAnimalsWithUrls(member).map((animal) => (
-                    <div>
-                      <img
-                        src={animal.url}
-                        alt={animal.name}
-                        title={animal.name}
-                        key={`${animal.name}-${member.name}`}
-                      />
-                      <span>{animal.name}</span>
-                    </div>
-                  ))}
-                </td>
-              </tr>
+              <MemberRow member={member} />
             ))}
           </tbody>
         </table>
