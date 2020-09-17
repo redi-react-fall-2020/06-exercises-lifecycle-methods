@@ -112,14 +112,30 @@ main {
     no-repeat;
   border: none;
   cursor: pointer;
-}
-
-.default button {
-  background-position: 0 0;
+  position: relative;
+  border-radius: 100px;
+  outline: solid transparent 1px;
 }
 
 .active button {
-  transition-duration: 1s;
-  transition: background-position 1s steps(28);
-  background-position: -2800px 0;
+  animation: explode 1s steps(28);
+}
+
+@keyframes explode {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -2800px 0;
+  }
+}
+
+.clap-count-total {
+  position: absolute;
+  font-size: 0.8rem;
+  width: 100px;
+  text-align: center;
+  left: 0;
+  top: calc(100px / 1.5);
+  color: black;
 }
