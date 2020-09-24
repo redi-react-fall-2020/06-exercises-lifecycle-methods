@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getMemberAnimalsWithUrls } from "./student";
 
 // Step 01 - Create a like toggle button
@@ -18,60 +18,48 @@ import { getMemberAnimalsWithUrls } from "./student";
  */
 // Step 03 - Refactor with all the same requirements into a functional component.
 
-export class MemberRow extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false,
-      likeCount: props.member.likeCount || 0
-    };
-  }
+export const MemberRow = ({ member }) => {
+  const [isActive, toggleActive] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
 
-  componentDidMount() {
+  useEffect(() => {
     const randomNumber = Math.trunc(Math.random() * 100);
-    this.setState({ likeCount: randomNumber });
-  }
+    setLikeCount(randomNumber);
+  }, []);
 
-  componentDidUpdate() {
-    if (this.state.active) {
+  useEffect(() => {
+    if (isActive) {
       setTimeout(() => {
-        this.setState({ active: false });
+        toggleActive({ active: false });
       }, 500);
     }
-  }
+  }, [isActive]);
 
-  addLike = () => {
-    this.setState({
-      active: !this.state.active,
-      likeCount: this.state.likeCount + 1
-    });
+  const addLike = () => {
+    toggleActive(!isActive);
+    setLikeCount(likeCount + 1);
   };
 
-  render() {
-    const { member } = this.props;
-    return (
-      <tr className="member-row" key={member.name}>
-        <td className="avatar-cell">
-          <img src={member.image} alt={member.name} />
-        </td>
-        <td className="name-cell">{member.name}</td>
-        <td className="role-cell">{member.role}</td>
-        <td className="animals-cell">
-          {getMemberAnimalsWithUrls(member).map((animal) => (
-            <div key={`${animal.name}-${member.name}`}>
-              <img src={animal.url} alt={animal.name} title={animal.name} />
-              <span>{animal.name}</span>
-            </div>
-          ))}
-        </td>
-        <td
-          className={`button-cell ${this.state.active ? "active" : "default"}`}
-        >
-          <button onClick={this.addLike}>
-            <span className="clap-count-total">{this.state.likeCount}</span>
-          </button>
-        </td>
-      </tr>
-    );
-  }
-}
+  return (
+    <tr className="member-row" key={member.name}>
+      <td className="avatar-cell">
+        <img src={member.image} alt={member.name} />
+      </td>
+      <td className="name-cell">{member.name}</td>
+      <td className="role-cell">{member.role}</td>
+      <td className="animals-cell">
+        {getMemberAnimalsWithUrls(member).map((animal) => (
+          <div key={`${animal.name}-${member.name}`}>
+            <img src={animal.url} alt={animal.name} title={animal.name} />
+            <span>{animal.name}</span>
+          </div>
+        ))}
+      </td>
+      <td className={`button-cell ${isActive ? "active" : "default"}`}>
+        <button onClick={addLike}>
+          <span className="clap-count-total">{likeCount}</span>
+        </button>
+      </td>
+    </tr>
+  );
+};
